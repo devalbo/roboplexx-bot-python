@@ -16,6 +16,7 @@ class DifferentialDrive(rpx_util.RpxDevice):
 
   @rpx_util.rpx_setter("motor_speeds")
   def set_motor_speeds(self, motor_left_speed, motor_right_speed):
+    print "SETTING MOTOR SPEEDS"
     self._motor_left.set_motor_speed(motor_left_speed)
     self._motor_right.set_motor_speed(motor_right_speed)
     return str((self._motor_left.get_motor_speed(), self._motor_right.get_motor_speed()))

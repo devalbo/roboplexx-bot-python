@@ -1,7 +1,7 @@
 __author__ = 'ajb'
 
 from flask.views import View
-from flask import request
+from flask import request, render_template
 
 def rpx_device(cls):
   cls.rpx_getters = {}
@@ -41,12 +41,18 @@ def rpx_command(cmd_name):
 class RpxPropGetterView(View):
   methods = ["GET"]
 
-  def __init__(self, dev_instance, prop_get_method_name):
+  def __init__(self, dev_instance, prop_get_method_name, prop_set_url, prop_label):
     self._device_instance = dev_instance
     self._prop_get_method_name = prop_get_method_name
+    self._prop_set_url = prop_set_url
+    self._prop_label = prop_label
 
   def dispatch_request(self):
-    return getattr(self._device_instance, self._prop_get_method_name)()
+    value = getattr(self._device_instance, self._prop_get_method_name)()
+    return render_template("prop.html",
+      value=value,
+      prop_set_url=self._prop_set_url,
+      prop_label=self._prop_label)
 
 
 class RpxPropSetterView(View):
@@ -90,7 +96,11 @@ class RpxDevice(object):
       app.add_url_rule(
         getter_path,
         view_func=RpxPropGetterView.as_view(endpoint_name,
-          dev_instance=self, prop_get_method_name=rpx_prop_get_method_name)
+          dev_instance=self,
+          prop_get_method_name=rpx_prop_get_method_name,
+          prop_set_url=getter_path,
+          prop_label=rpx_prop
+        )
       )
 
     for rpx_prop, rpx_prop_set_method_name in self.rpx_setters.iteritems():
@@ -113,4 +123,10 @@ class RpxDevice(object):
       )
 
 class RpxDevNotInitializedError(Exception):
+  pass
+
+class RpxDevCommError(Exception):
+  pass
+
+class RpxPropertyValidationError(Exception):
   pass

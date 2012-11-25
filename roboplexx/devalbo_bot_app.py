@@ -16,3 +16,8 @@ def joystick():
 @devalbo_bot_app.route('/sliders')
 def sliders():
   return render_template('sliders.html')
+
+@devalbo_bot_app.route('/form')
+def form():
+  return render_template('form.html')
+

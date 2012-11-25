@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Devalbo Bot - Form Mode{% endblock %}
+
+{% block container_content %}
+<div id="content">
+    <form name="values" action="/io/diff_drive/motor_speeds" method="post">
+        Left speed: <input type="text" name="left_speed"><br>
+        Right speed: <input type="text" name="right_speed"><br>
+        <input type="submit" value="Update">
+    </form>
+</div>
+{% endblock %}
