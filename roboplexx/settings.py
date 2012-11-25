@@ -21,3 +21,5 @@ ROBOPLEXX_HOST_NAME = parser.get("roboplexx", "ROBOPLEXX_HOST_NAME")
 ROBOPLEXX_PORT = int(parser.get("roboplexx", "ROBOPLEXX_PORT"))
 
 DEBUG_MODE_ON = bool(parser.get("roboplexx", "DEBUG_MODE_ON"))
+
+ROBOPLEXX_STATIC_DIR = parser.get("roboplexx", "ROBOPLEXX_STATIC_DIR")

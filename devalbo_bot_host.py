@@ -21,8 +21,6 @@ host.register_blueprint(devalbo_bot_app, url_prefix='/app')
 host.wsgi_app = SharedDataMiddleware(host.wsgi_app,
   { '/static': settings.ROBOPLEXX_STATIC_DIR } )
 
-
-
 mc_left = roboplexx.drivers.DemoMotorController("mc_left")
 mc_right = roboplexx.drivers.DemoMotorController("mc_right")
 #mc_left = roboplexx.drivers.PololuSimpleMotorController("mc_left")

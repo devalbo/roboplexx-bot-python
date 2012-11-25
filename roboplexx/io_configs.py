@@ -14,7 +14,7 @@ from jinja2 import TemplateNotFound
 
 #from settings import mm_core as mmc
 #import MmAnywhere_pb2
-import mm_util
+#import mm_util
 
 configurations = Blueprint('configurations', __name__,
                            template_folder='templates')
