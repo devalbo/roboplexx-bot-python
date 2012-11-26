@@ -1,12 +1,13 @@
 from roboplexx import rpx_util
+from ..devices import dev_basic
 
 __author__ = 'ajb'
 
 @rpx_util.rpx_device
-class MultiHost(rpx_util.RpxDevice):
+class MultiHost(dev_basic.RpxDevice):
 
   def __init__(self, device_id):
-    rpx_util.RpxDevice.__init__(self, device_id)
+    dev_basic.RpxDevice.__init__(self, device_id)
 
   def get_subdevices(self):
     raise NotImplementedError("%s not implemented for device ID '%s'" %

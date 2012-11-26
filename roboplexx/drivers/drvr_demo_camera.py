@@ -1,12 +1,14 @@
 from roboplexx import rpx_util
+from ..devices import dev_basic
+
 
 __author__ = 'ajb'
 
 @rpx_util.rpx_device
-class DemoCamera(rpx_util.RpxDevice):
+class DemoCamera(dev_basic.RpxDevice):
 
   def __init__(self, device_id):
-    rpx_util.RpxDevice.__init__(self, device_id)
+    dev_basic.RpxDevice.__init__(self, device_id)
 
   @rpx_util.rpx_getter("demo_camera_version")
   def get_demo_camera_version(self):

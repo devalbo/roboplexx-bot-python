@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Devalbo Bot - Form Mode{% endblock %}
+
+{% block container_content %}
+<div id="content">
+    <form name="values" action="{{ prop_set_url }}" method="post">
+      {% for key, value in values.iteritems() %}
+        {{ key }}: <input type="text" name="{{  key }}" value="{{ value }}"><br>
+      {% endfor %}
+        <input type="submit" value="Update">
+    </form>
+</div>
+{% endblock %}

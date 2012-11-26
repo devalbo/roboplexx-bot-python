@@ -1,12 +1,13 @@
 from roboplexx import rpx_util
+from ..devices import dev_basic
 
 __author__ = 'ajb'
 
 @rpx_util.rpx_device
-class McBasic(rpx_util.RpxDevice):
+class McBasic(dev_basic.RpxDevice):
 
   def __init__(self, device_id):
-    rpx_util.RpxDevice.__init__(self, device_id)
+    dev_basic.RpxDevice.__init__(self, device_id)
     self._direction_flipped = False
 
   @rpx_util.rpx_getter("direction_flipped")
