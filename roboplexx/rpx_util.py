@@ -128,7 +128,6 @@ class RpxMultiPropSetterView(View):
       prop_set_url=self._prop_set_url
       )
 
-
 #@rpx_device
 #class RpxDevice(object):
 #

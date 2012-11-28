@@ -8,6 +8,7 @@ from roboplexx.rpx_host import dev_host
 from roboplexx.io_configs import configurations
 from roboplexx.devalbo_bot_app import devalbo_bot_app
 from roboplexx import settings
+from flask import request, render_template
 
 from flask import Flask
 from werkzeug import SharedDataMiddleware
@@ -21,10 +22,12 @@ host.register_blueprint(devalbo_bot_app, url_prefix='/app')
 host.wsgi_app = SharedDataMiddleware(host.wsgi_app,
   { '/static': settings.ROBOPLEXX_STATIC_DIR } )
 
-mc_left = roboplexx.drivers.DemoMotorController("mc_left")
-mc_right = roboplexx.drivers.DemoMotorController("mc_right")
-#mc_left = roboplexx.drivers.PololuSimpleMotorController("mc_left")
-#mc_right = roboplexx.drivers.PololuSimpleMotorController("mc_right")
+#mc_left = roboplexx.drivers.DemoMotorController("mc_left")
+#mc_right = roboplexx.drivers.DemoMotorController("mc_right")
+mc_left = roboplexx.drivers.PololuSimpleMotorController("mc_left")
+mc_right = roboplexx.drivers.PololuSimpleMotorController("mc_right")
+mc_left.set_connection_string("/dev/ttyACM0")
+mc_right.set_connection_string("/dev/ttyACM1")
 diff_drive = roboplexx.drivers.DifferentialDrive("diff_drive", mc_left, mc_right)
 camera = roboplexx.drivers.DemoCamera("camera")
 
@@ -37,6 +40,10 @@ mc_left.register_with_host(host)
 mc_right.register_with_host(host)
 diff_drive.register_with_host(host)
 camera.register_with_host(host)
+
+@host.route("/joystick-test")
+def hello():
+  return render_template("joystick-drive-absolute.html")
 
 print host.url_map
 
