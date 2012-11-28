@@ -28,7 +28,7 @@ class PololuSimpleMotorController(devices.McBasic):
     return self._connection_string
 
   def drvr_set_motor_speed(self, speed):
-    _speed = int(speed)
+    _speed = int(round(float(speed)))
     if _speed < -100 or _speed > 100:
       raise rpx_util.RpxPropertyValidationError("Speed must be between -100 and 100 % (sent %s)" % _speed)
 
