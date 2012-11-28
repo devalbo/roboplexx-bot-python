@@ -47,12 +47,12 @@ class PololuSimpleMotorController(devices.McBasic):
 
   def drvr_init(self):
     self._connection = serial.Serial(self._connection_string, timeout=1.5)
-    self._connection._send_command("GO")
+    self._send_command("GO")
 #    return ""
 
   def _send_command(self, command):
-    serial.write("%s\n" % command)
-    response = serial.readline()
+    self._connection.write("%s\n" % command)
+    response = self._connection.readline()
     if response.startswith('.'):
       return response
     elif response.startswith('!'):
