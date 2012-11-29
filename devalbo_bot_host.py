@@ -43,7 +43,7 @@ camera.register_with_host(host)
 
 @host.route("/joystick-test")
 def hello():
-  return render_template("joystick-drive-absolute.html")
+  return render_template("roboplexx-drive-diff.html")
 
 print host.url_map
 
