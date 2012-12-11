@@ -7,24 +7,23 @@ var VirtualJoystick = function (opts) {
     this._range = opts.range || 60;
 
     this._container.style.position = "relative";
-    this._container.appendChild(this._baseEl);
-    this._baseEl.style.position = "absolute"
-    // this._baseEl.style.display	= "none";
-    //    this._baseEl.style.left = (document.width / 2 - this._baseEl.width / 2) + "px";
-    //    this._baseEl.style.top = (document.height / 2 - this._baseEl.height / 2) + "px";
-    this._baseEl.style.left = ($("#container").width() / 2 - this._baseEl.width / 2) + "px";
-    this._baseEl.style.top = ($("#container").height() / 2 - this._baseEl.height / 2) + "px";
-    //alert("Window width: " + $(window).width() + " Window height: " + $(window).height());
-    //alert("Document width: " + $(document).width() + " Document height: " + $(document).height());
-    //alert("Container width: " + $("#container").width() + " Container height: " + $("#container").height());
+//    this._baseEl.style.position = "absolute";
+    this._baseEl.style.left = (this._container.width / 2 - this._baseEl.width / 2) + "px";
+    this._baseEl.style.top = (this._container.height / 2 - this._baseEl.height / 2) + "px";
 
+    this._stickEl.style.position = "relative";
+//    this._stickEl.style.display = "none";
+
+    this._container.appendChild(this._baseEl);
     this._container.appendChild(this._stickEl);
-    this._stickEl.style.position = "absolute"
-    this._stickEl.style.display = "none";
 
     this._pressed = false;
-    this._baseX = $("#container").width() / 2;
-    this._baseY = $("#container").height() / 2;
+//    this._baseX = this._container.width / 2;
+//    this._baseY = this._container.height / 2;
+    this._baseX = (this._baseEl.width / 2);
+    this._baseY = this._baseEl.height / 2;
+//    this._baseX = 300;
+//    this._baseY = 200;
     this._stickX = 0;
     this._stickY = 0;
 
@@ -72,14 +71,17 @@ VirtualJoystick.touchScreenAvailable	= function()
 //										//
 //////////////////////////////////////////////////////////////////////////////////
 
-VirtualJoystick.prototype.absX = function () { return this._stickX; }
-VirtualJoystick.prototype.absY = function () { return this._stickY; }
+//VirtualJoystick.prototype.absX = function () { return this._stickX; }
+//VirtualJoystick.prototype.absY = function () { return this._stickY; }
 
-VirtualJoystick.prototype.deltaX	= function(){ return this._stickX - this._baseX;	}
-VirtualJoystick.prototype.deltaY	= function(){ return this._stickY - this._baseY;	}
+//VirtualJoystick.prototype.deltaX	= function(){ return this._stickX - this._baseX; }
+//VirtualJoystick.prototype.deltaY	= function(){ return this._stickY - this._baseY;	}
 
-VirtualJoystick.prototype.deltaXPercent = function () { return ((this._stickX - ($("#container").width() / 2)) / ($("#container").width() / 2)) * 100; }
-VirtualJoystick.prototype.deltaYPercent = function () { return -((this._stickY - ($("#container").height() / 2)) / ($("#container").height() / 2)) * 100; }
+VirtualJoystick.prototype.deltaX	= function(){ return this._stickX; }
+VirtualJoystick.prototype.deltaY	= function(){ return this._stickY; }
+
+//VirtualJoystick.prototype.deltaXPercent = function () { return ((this._stickX - (this._container.width() / 2)) / (this._container.width() / 2)) * 100; }
+//VirtualJoystick.prototype.deltaYPercent = function () { return -((this._stickY - (this._container.height() / 2)) / (this._container.height() / 2)) * 100; }
 
 VirtualJoystick.prototype.up	= function(){
 	if( this._pressed === false )	return false;
@@ -141,25 +143,30 @@ VirtualJoystick.prototype._onDown	= function(x, y)
 	this._pressed	= true; 
 //	this._baseX	= x;
 //	this._baseY	= y;
-	this._stickX	= x;
-	this._stickY	= y;
+	this._stickX	= x - 200;
+	this._stickY	= y - 200;
 
 	this._stickEl.style.display	= "";
-	this._stickEl.style.left	= (x - this._stickEl.width /2)+"px";
-	this._stickEl.style.top		= (y - this._stickEl.height/2)+"px";
+	this._stickEl.style.left	= (this._stickX - this._stickEl.width /2)+"px";
+	this._stickEl.style.top		= (this._stickY - this._stickEl.height/2)+"px";
 
-	// this._baseEl.style.display	= "";
-	// this._baseEl.style.left		= (x - this._baseEl.width /2)+"px";
-	// this._baseEl.style.top		= (y - this._baseEl.height/2)+"px";
+//	this._baseEl.style.display	= "";
+//	this._baseEl.style.left		= (x - this._baseEl.width /2)+"px";
+//	this._baseEl.style.top		= (y - this._baseEl.height/2)+"px";
 }
 
 VirtualJoystick.prototype._onMove	= function(x, y)
 {
 	if( this._pressed === true ){
-		this._stickX	= x;
-		this._stickY	= y;
-		this._stickEl.style.left	= (x - this._stickEl.width /2)+"px";
-		this._stickEl.style.top		= (y - this._stickEl.height/2)+"px";
+		this._stickX	= x - 200;
+		this._stickY	= y - 200;
+		this._stickEl.style.left	= (this._stickX - this._stickEl.width /2)+"px";
+		this._stickEl.style.top		= (this._stickY - this._stickEl.height/2)+"px";
+
+//        this._stickEl.style.position = "absolute";
+//        this._stickEl.style.left	= x+"px";
+//        this._stickEl.style.top		= y+"px";
+//        console.log("setting to " + this._stickEl.style.left + ":" + this._stickEl.style.top);
 	}
 }
 
@@ -175,15 +182,24 @@ VirtualJoystick.prototype._onMouseUp	= function(event)
 
 VirtualJoystick.prototype._onMouseDown	= function(event)
 {
-	var x	= event.clientX;
-	var y	= event.clientY;
+//	var x	= event.clientX - this._container.offsetLeft;
+//	var y	= event.clientY - this._container.offsetTop;
+    var x = event.offsetX;
+    var y = event.offsetY;
+//	var x	= event.clientX;
+//	var y	= event.clientY;
 	return this._onDown(x, y);
 }
 
 VirtualJoystick.prototype._onMouseMove	= function(event)
 {
-	var x	= event.clientX;
-	var y	= event.clientY;
+//	var x	= event.clientX - this._container.offsetLeft;
+//	var y	= event.clientY - this._container.offsetTop;
+    var x = event.offsetX;
+    var y = event.offsetY;
+//    var x	= event.clientX;
+//    var y	= event.clientY;
+//    console.log(x + ":" + y)
 	return this._onMove(x, y);
 }
 
@@ -225,10 +241,12 @@ VirtualJoystick.prototype._onTouchMove	= function(event)
 
 VirtualJoystick.prototype._buildJoystickBase = function () {
     var canvas = document.createElement('canvas');
-    //    canvas.width = 126;
-    //    canvas.height = 126;
-    canvas.width = $("#container").width();
-    canvas.height = $("#container").height();
+        canvas.width = 400;
+        canvas.height = 400;
+//    canvas.width = $("#container").width();
+//    canvas.height = $("#container").height();
+//    canvas.width = this._container.width;
+//    canvas.height = this._container.height;
 
     var ctx = canvas.getContext('2d');
     ctx.beginPath();
@@ -252,7 +270,6 @@ VirtualJoystick.prototype._buildJoystickBase = function () {
     ctx.lineWidth = 2;
     ctx.arc(canvas.width / 2, canvas.height / 2, this._maxSpeedRadius, 0, Math.PI * 2, true);
     ctx.stroke();
-
 
     return canvas;
 }

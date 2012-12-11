@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block header_styles %}
+  <link type="text/css" rel="stylesheet" href="/static/css/joystick.css">
+{% endblock %}
+
+{% block title %}Devalbo Bot - Joystick Mode{% endblock %}
+
+{% block container_content %}
+<table>
+<tr>
+  <td>
+    <img src="http://www.warcrafthuntersunion.com/wp-content/uploads/2011/07/robot1.jpg"/>
+    <div id="speed-left" style="max-width:200px;text-align:center;">Left speed: ???</div>
+    <div id="speed-right" style="max-width:200px;text-align:center;">Right speed: ???</div>
+    <div id="stick-x" style="max-width:200px;text-align:center;">Stick X: ???</div>
+    <div id="stick-y" style="max-width:200px;text-align:center;">Stick Y: ???</div>
+  </td>
+  <td>
+    <div id="joystick-div">
+    </div>
+  </td>
+</tr>
+</table>
+{% endblock %}
+
+{% block footer_scripts %}
+  <script src="/static/js/virtualjoystick_absolute_new2.js"></script>
+  <script>
+    console.log("touchscreen is", VirtualJoystick.touchScreenAvailable() ? "available" : "not available");
+    var joystick	= new VirtualJoystick({
+      container	: document.getElementById('joystick-div'),
+      mouseSupport	: true,
+    });
+
+    var lastSentSpeedLeft = null,
+        lastSentSpeedRight = null;
+
+    function sendUpdatedSpeeds() {
+      var speedLeft = joystick.getLeftSpeedPercentCommand(),
+          speedRight = joystick.getRightSpeedPercentCommand();
+      var stickX = joystick.getStickX(),
+          stickY = joystick.getStickY();
+      if (speedLeft == null || speedRight == null) {
+        return;
+      }
+
+      if (speedLeft != lastSentSpeedLeft ||
+          speedRight != lastSentSpeedRight)
+      {
+//                    alert({ left_speed: speedLeft, right_speed: speedRight });
+        var sentTimeMs = new Date().getTime();
+{#        $.post("/io/diff_drive/motor_speeds", { left_speed: speedLeft, right_speed: speedRight} );#}
+        lastSentSpeedLeft = speedLeft;
+        lastSentSpeedRight = speedRight;
+      }
+      var speedLeftEl = document.getElementById('speed-left');
+      var speedRightEl = document.getElementById('speed-right');
+      var stickXEl = document.getElementById('stick-x');
+      var stickYEl = document.getElementById('stick-y');
+      speedLeftEl.innerHTML = "Left speed: " + lastSentSpeedLeft.toFixed(1) + " %";
+      speedRightEl.innerHTML = "Right speed: " + lastSentSpeedRight.toFixed(1) + " %";
+      stickXEl.innerHTML = "X: " + stickX;
+      stickYEl.innerHTML = "Y: " + stickY;
+{#      var outputEl	= document.getElementById('command');#}
+{#      outputEl.innerHTML	= '<b>Command:</b> '#}
+{#          + ' Left: '+lastSentSpeedLeft#}
+{#          + ' Right: '+lastSentSpeedRight;#}
+    }
+    setInterval(sendUpdatedSpeeds, 1000/3);
+
+  </script>
+{% endblock %}

@@ -55,6 +55,7 @@
       img.onload = imageOnload;
       img.onclick = imageOnclick;
       img.src = "http://192.168.0.152:8080/?action=snapshot&n=" + (++imageNr);
+      img.width = 400;
       var webcam = document.getElementById("webcam");
       webcam.insertBefore(img, webcam.firstChild);
     }
@@ -88,7 +89,7 @@
         </td>
         <td>
 {#          <img id="streamimage" class="xform" src="http://192.168.0.152:8080/?action=snapshot">#}
-          <div id="webcam"><noscript><img src="http://192.168.0.152:8080/?action=snapshot" /></noscript></div>
+          <div id="webcam" style="min-width: 400px;"><noscript><img src="http://192.168.0.152:8080/?action=snapshot" /></noscript></div>
         </td>
         <td>
           <form name="values" action="/io/mc_right/motor_speed" method="post">
