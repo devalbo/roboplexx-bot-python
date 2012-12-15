@@ -23,8 +23,8 @@ host.wsgi_app = SharedDataMiddleware(host.wsgi_app,
 
 
 
-mc_left = roboplexx.drivers.PololuSimpleMotorController("mc_left")
-mc_right = roboplexx.drivers.PololuSimpleMotorController("mc_right")
+mc_left = roboplexx.drivers.DemoMotorController("mc_left")
+mc_right = roboplexx.drivers.DemoMotorController("mc_right")
 diff_drive = roboplexx.drivers.DifferentialDrive("diff_drive", mc_left, mc_right)
 camera = roboplexx.drivers.DemoCamera("camera")
 
