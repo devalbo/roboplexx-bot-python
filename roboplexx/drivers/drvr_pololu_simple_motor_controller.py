@@ -58,7 +58,7 @@ class PololuSimpleMotorController(devices.McBasic):
     elif response.startswith('!'):
       raise rpx_util.RpxDevCommError("Motor error - stopped: %s" % response)
     elif response.startswith('?'):
-      raise rpx_util.RpxDevCommError("Command not understood: %s" % response)
+      raise rpx_util.RpxDevCommError("Command not understood: %s" % command)
     else:
       raise rpx_util.RpxDevCommError("Unknown response: %s" % response)
 
