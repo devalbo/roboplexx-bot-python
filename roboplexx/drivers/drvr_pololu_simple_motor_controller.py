@@ -46,8 +46,8 @@ class PololuSimpleMotorController(devices.McBasic):
     return self._motor_speed
 
   def drvr_init(self):
-#    self._connection = serial.Serial(self._connection_string, timeout=1.5)
-#    self._send_command("GO")
+    self._connection = serial.Serial(self._connection_string, timeout=1.5)
+    self._send_command("GO")
     pass
 
   def _send_command(self, command):
