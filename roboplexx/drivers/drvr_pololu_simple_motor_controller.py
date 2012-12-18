@@ -35,6 +35,7 @@ class PololuSimpleMotorController(devices.McBasic):
     cmd_direction = "F"
     if (self._direction_flipped and _speed >= 0) or (not self._direction_flipped and _speed < 0):
       cmd_direction = "R"
+      _speed = abs(_speed)
 
     cmd = "%s%s%%" % (cmd_direction, _speed)
     self._send_command(cmd)
