@@ -50,7 +50,7 @@
       {
 //                    alert({ left_speed: speedLeft, right_speed: speedRight });
         var sentTimeMs = new Date().getTime();
-{#        $.post("/io/diff_drive/motor_speeds", { left_speed: speedLeft, right_speed: speedRight} );#}
+        $.post("/io/diff_drive/motor_speeds", { left_speed: speedLeft, right_speed: speedRight} );
         lastSentSpeedLeft = speedLeft;
         lastSentSpeedRight = speedRight;
       }
