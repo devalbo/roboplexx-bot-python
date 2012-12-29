@@ -1,6 +1,7 @@
 __author__ = 'ajb'
 
 from flask import Blueprint, render_template
+import settings, jinja2
 
 devalbo_bot_app = Blueprint('app', __name__,
   template_folder='templates')
@@ -17,11 +18,13 @@ def joystick():
 @devalbo_bot_app.route('/joystick-original')
 def joystick2():
 #  return render_template('joystick.html')
-  return render_template('joystick-drive-absolute-old.html')
+  return render_template('joystick-drive-absolute-old.html',
+    {"camera_html_tag": settings.CAMERA_HTML_TAG})
 
 @devalbo_bot_app.route('/joystick-raphael')
 def joystick2():
-  return render_template('joystick-raphael.html')
+  return render_template('joystick-raphael.html',
+    camera_html_tag=jinja2.Markup(settings.CAMERA_HTML_TAG))
 
 @devalbo_bot_app.route('/sliders')
 def sliders():

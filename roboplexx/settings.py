@@ -12,7 +12,7 @@ running, something needs to be fixed.
 
 import ConfigParser
 parser = ConfigParser.SafeConfigParser()
-parser.read("rpx_config.ini")
+parser.read("../rpx_config.ini")
 
 # host name to use for server (see http://flask.pocoo.org/docs/api/)
 ROBOPLEXX_HOST_NAME = parser.get("roboplexx", "ROBOPLEXX_HOST_NAME")
@@ -23,3 +23,5 @@ ROBOPLEXX_PORT = int(parser.get("roboplexx", "ROBOPLEXX_PORT"))
 DEBUG_MODE_ON = bool(parser.get("roboplexx", "DEBUG_MODE_ON"))
 
 ROBOPLEXX_STATIC_DIR = parser.get("roboplexx", "ROBOPLEXX_STATIC_DIR")
+
+CAMERA_HTML_TAG = parser.get("roboplexx", "CAMERA_HTML_TAG")

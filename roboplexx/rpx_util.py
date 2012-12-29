@@ -128,6 +128,10 @@ class RpxMultiPropSetterView(View):
       prop_set_url=self._prop_set_url
       )
 
+
+def convert_to_bool(exp):
+  return exp.lower() in ("yes", "true", "t", "1")
+
 #@rpx_device
 #class RpxDevice(object):
 #
