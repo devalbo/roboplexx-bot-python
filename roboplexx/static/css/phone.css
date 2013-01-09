@@ -1,0 +1,21 @@
+/* Override skin1.css to make it vertical */
+
+/* height is now larger than width  */
+.slider {
+    height:300px;
+    width:9px;
+    margin:0 0 0 60px;
+}
+
+/* tweak drag handle position */
+.handle {
+    top:0;
+    left:-10px;
+}
+
+/* position progressbar on the bottom edge */
+.progress {
+    width:9px;
+    position:absolute;
+    bottom:0;
+}

@@ -1,4 +1,4 @@
-from roboplexx import settings
+import settings
 
 __author__ = 'ajb'
 
@@ -7,7 +7,6 @@ import roboplexx.drivers
 from roboplexx.rpx_host import dev_host
 from roboplexx.io_configs import configurations
 from roboplexx.devalbo_bot_app import devalbo_bot_app
-from roboplexx import settings
 
 from flask import Flask
 from werkzeug import SharedDataMiddleware

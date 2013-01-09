@@ -34,3 +34,10 @@ def sliders():
 def form():
   return render_template('form.html')
 
+@devalbo_bot_app.route('/phone')
+def phone_ui():
+  return render_template('mobile.html')
+
+@devalbo_bot_app.route('/phone2')
+def phone_ui2():
+  return render_template('mobile2.html')

@@ -25,7 +25,6 @@ class McBasic(dev_basic.RpxDevice):
 
   @rpx_util.rpx_setter("motor_speed")
   def set_motor_speed(self, speed):
-    print "SETTING MOTOR SPEED TO " + speed
     speed_set = self.drvr_set_motor_speed(speed)
     self._motor_speed = speed_set
     return self.get_motor_speed()

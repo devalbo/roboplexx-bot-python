@@ -12,10 +12,6 @@ This module supports accessing and updating device configurations.
 from flask import Blueprint, render_template, abort, request, url_for
 from jinja2 import TemplateNotFound
 
-#from settings import mm_core as mmc
-#import MmAnywhere_pb2
-#import mm_util
-
 configurations = Blueprint('configurations', __name__,
                            template_folder='templates')
 

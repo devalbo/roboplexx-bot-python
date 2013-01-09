@@ -1,6 +1,7 @@
 __author__ = 'ajb'
 
 from ..rpx_util import *
+import json
 
 @rpx_device
 class RpxDevice(object):
@@ -10,11 +11,22 @@ class RpxDevice(object):
 
   @rpx_command("rpx_activate")
   def activate(self):
-    return self.drvr_init()
+    self.drvr_init()
+    self.rpx_apply_parameters()
 
   @rpx_command("rpx_deactivate")
   def deactivate(self):
     return self.drvr_uninit()
+
+  def save_parameters(self, param_dict):
+    param_str = json.dumps(param_dict)
+    # TODO: parameter saving logic goes here
+
+  def rpx_apply_parameters(self):
+    param_str = "{}"
+    # TODO: parameter retrieving logic goes here
+    param_dict = json.loads(param_str)
+#    self.drvr_apply_parameters(param_dict)
 
   def drvr_init(self):
     raise NotImplementedError("%s not implemented for device ID '%s'" %
@@ -23,6 +35,10 @@ class RpxDevice(object):
   def drvr_un_init(self):
     raise NotImplementedError("%s not implemented for device ID '%s'" %
                               (self.drvr_uninit.__name__, self.device_id))
+
+  def drvr_apply_parameters(self, param_dict):
+    raise NotImplementedError("%s not implemented for device ID '%s'" %
+                              (self.drvr_apply_parameters.__name__, self.device_id))
 
   def register_with_host(self, app):
     for rpx_prop, rpx_prop_get_method_name in self.rpx_getters.iteritems():
