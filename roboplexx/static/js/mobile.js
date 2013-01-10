@@ -21,6 +21,7 @@ function init()
 {
     setup_page();
     setInterval(process_gauges, 1000/35);
+    setInterval(sendUpdatedSpeeds, 1000/333);
 //    setInterval(sendUpdatedSpeeds, 1000/333);
 
     if(touchable) {
@@ -158,6 +159,16 @@ function process_gauges()
 
 //    }
 
+}
+
+function sendUpdatedSpeeds() {
+    if (speedLeft != lastSentSpeedLeft ||
+        speedRight != lastSentSpeedRight)
+    {
+        $.post("motors", { left_speed: speedLeft, right_speed: speedRight } );
+        lastSentSpeedLeft = speedLeft;
+        lastSentSpeedRight = speedRight;
+    }
 }
 
 //function process_gauges() {
@@ -312,7 +323,7 @@ function sendUpdatedSpeeds() {
     if (speedLeft != lastSentSpeedLeft ||
         speedRight != lastSentSpeedRight)
     {
-        $.post("motors", { left_speed: speedLeft, right_speed: speedRight } );
+        $.post("/io/diff_drive/motor_speeds", { left_speed: speedLeft, right_speed: speedRight} );
         lastSentSpeedLeft = speedLeft;
         lastSentSpeedRight = speedRight;
     }
