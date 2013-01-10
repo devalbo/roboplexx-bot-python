@@ -4,8 +4,8 @@ var left_control = null,
 var left_control_ctx = null,
     right_control_ctx = null;
 
-var speedLeft = null,
-    speedRight = null;
+var speedLeft = 0,
+    speedRight = 0;
 var lastSentSpeedLeft = null,
     lastSentSpeedRight = null;
 
