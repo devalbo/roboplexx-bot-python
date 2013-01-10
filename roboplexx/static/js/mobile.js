@@ -215,7 +215,7 @@ function createImageLayer() {
     img.style.zIndex = -1;
     img.onload = imageOnload;
     img.onclick = imageOnclick;
-    img.src = "/?action=snapshot&n=" + (++imageNr);
+    img.src = camera_server_url + "/?action=snapshot&n=" + (++imageNr);
     var webcam = document.getElementById("webcam");
     webcam.insertBefore(img, webcam.firstChild);
 }

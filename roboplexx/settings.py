@@ -25,3 +25,5 @@ DEBUG_MODE_ON = bool(parser.get("roboplexx", "DEBUG_MODE_ON"))
 ROBOPLEXX_STATIC_DIR = parser.get("roboplexx", "ROBOPLEXX_STATIC_DIR")
 
 CAMERA_HTML_TAG = parser.get("roboplexx", "CAMERA_HTML_TAG")
+
+CAMERA_SERVER_URL = parser.get("roboplexx", "CAMERA_SERVER_URL")

@@ -37,7 +37,8 @@ def form():
 @devalbo_bot_app.route('/phone')
 def phone_ui():
   return render_template('mobile.html',
-    camera_html_tag=jinja2.Markup(settings.CAMERA_HTML_TAG))
+    camera_html_tag=jinja2.Markup(settings.CAMERA_HTML_TAG),
+    camera_server_url=settings.CAMERA_SERVER_URL)
 
 @devalbo_bot_app.route('/phone2')
 def phone_ui2():
