@@ -29,16 +29,16 @@ function init()
 function setup_page()
 {
     left_control = document.getElementById('left_control');
-    left_control.width = window.innerWidth / 10;
-    left_control.height = window.innerHeight;
+//    left_control.width = window.innerWidth / 10;
+//    left_control.height = window.innerHeight;
 
     left_control_ctx = left_control.getContext('2d');
     left_control_ctx.strokeStyle = "#ffffff";
     left_control_ctx.lineWidth = 2;
 
     right_control = document.getElementById('right_control');
-    right_control.width = window.innerWidth / 10;
-    right_control.height = window.innerHeight;
+//    right_control.width = window.innerWidth / 10;
+//    right_control.height = window.innerHeight;
 
     right_control_ctx = right_control.getContext('2d');
     right_control_ctx.strokeStyle = "#ffffff";
